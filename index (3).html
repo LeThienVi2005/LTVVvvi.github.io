@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Profile Web</title>
+
+  <!-- Combined CSS for all projects -->
+  <link rel="stylesheet" href="style.css"> <!-- For Profile Card -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"> <!-- For Image Editor -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/> <!-- For Image Editor -->
+
+  <style>
+    /* Global styles for the combined page */
+    body {
+      font-family: 'Poppins', sans-serif; /* Default font */
+      margin: 0;
+      padding: 0;
+      background: #f0f2f5; /* Light background for the main page */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 50px; /* Space between sections */
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    section {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 1000px;
+      box-sizing: border-box;
+    }
+
+    /* Styles for Profile Card UI Design */
+    .profile-card-section {
+      background: #E3F2FD; /* Background for this specific section */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* Ensure it takes full height */
+      width: 100%; /* Take full width */
+      padding: 0; /* Remove padding from section to let profile-card handle it */
+      box-shadow: none; /* Remove section shadow */
+    }
+
+    .profile-card {
+      width: 300px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .profile-card .image {
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+      padding: 3px;
+      background: #5372F0;
+    }
+    .profile-card .image img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #fff;
+    }
+    .profile-card .data h2 {
+      font-size: 25px;
+      margin-top: 15px;
+      color: #333;
+    }
+    .profile-card .data span {
+      font-size: 18px;
+      color: #666;
+    }
+    .profile-card .row {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      width: 100%;
+      margin: 25px 0 0;
+    }
+    .profile-card .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 15px;
+    }
+    .profile-card .info h3 {
+      font-size: 16px;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 5px;
+      white-space: nowrap;
+    }
+    .profile-card .info span {
+      font-size: 16px;
+color: #666;
+      display: block;
+    }
+    .profile-card .buttons {
+      display: flex;
+      margin-top: 25px;
+      gap: 10px;
+    }
+    .profile-card .btn {
+      background: #5372F0;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .profile-card .btn:hover {
+      background: #3a57e8;
+    }
+
+    /* Styles for Playable Piano */
+    .piano-section {
+      background: #E3F2FD;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100%;
+      padding: 0;
+      box-shadow: none;
+    }
+    .piano-section .wrapper {
+      padding: 35px 40px;
+      border-radius: 20px;
+      background: #141414;
+      width: auto; /* Adjust width as needed */
+      max-width: 90%;
+    }
+    .piano-section header {
+      display: flex;
+      color: #B2B2B2;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap; /* Allow wrapping for smaller screens */
+      gap: 15px; /* Space between header items */
+    }
+    .piano-section header h2 {
+      font-size: 1.6rem;
+      color: #B2B2B2; /* Override global h2 color */
+    }
+    .piano-section header .column {
+      display: flex;
+      align-items: center;
+    }
+    .piano-section header span {
+      font-weight: 500;
+      margin-right: 15px;
+      font-size: 1.19rem;
+    }
+    .piano-section header input {
+      outline: none;
+      border-radius: 30px;
+    }
+    .piano-section .volume-slider input {
+      accent-color: #fff;
+    }
+    .piano-section .keys-checkbox input {
+      height: 30px;
+      width: 60px;
+      cursor: pointer;
+      appearance: none;
+      position: relative;
+      background: #4B4B4B
+    }
+    .piano-section .keys-checkbox input::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #8c8c8c;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+    }
+    .piano-section .keys-checkbox input:checked::before {
+      left: 35px;
+      background: #fff;
+    }
+    .piano-section .piano-keys {
+      display: flex;
+      list-style: none;
+      margin-top: 40px;
+      justify-content: center; /* Center the keys */
+      flex-wrap: wrap; /* Allow keys to wrap */
+    }
+    .piano-section .piano-keys .key {
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      text-transform: uppercase;
+    }
+    .piano-section .piano-keys .black {
+      z-index: 2;
+      width: 44px;
+      height: 140px;
+      margin: 0 -22px 0 -22px;
+      border-radius: 0 0 5px 5px;
+      background: linear-gradient(#333, #000);
+    }
+    .piano-section .piano-keys .black.active {
+      box-shadow: inset -5px -10px 10px rgba(255,255,255,0.1);
+      background:linear-gradient(to bottom, #000, #434343);
+    }
+    .piano-section .piano-keys .white {
+      height: 230px;
+      width: 70px;
+border-radius: 8px;
+      border: 1px solid #000;
+      background: linear-gradient(#fff 96%, #eee 4%);
+    }
+    .piano-section .piano-keys .white.active {
+      box-shadow: inset -5px 5px 20px rgba(0,0,0,0.2);
+      background:linear-gradient(to bottom, #fff 0%, #eee 100%);
+    }
+    .piano-section .piano-keys .key span {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      color: #A2A2A2;
+      font-size: 1.13rem;
+      text-align: center;
+    }
+    .piano-section .piano-keys .key.hide span {
+      display: none;
+    }
+    .piano-section .piano-keys .black span {
+      bottom: 13px;
+      color: #888888;
+    }
+
+    @media screen and (max-width: 815px) {
+      .piano-section .wrapper {
+        padding: 25px;
+      }
+      .piano-section header {
+        flex-direction: column;
+      }
+      .piano-section header :where(h2, .column) {
+        margin-bottom: 13px;
+      }
+      .piano-section .volume-slider input {
+        max-width: 100px;
+      }
+      .piano-section .piano-keys {
+        margin-top: 20px;
+      }
+      .piano-section .piano-keys .key:where(:nth-child(9), :nth-child(10)) {
+        display: none;
+      }
+      .piano-section .piano-keys .black {
+        height: 100px;
+        width: 40px;
+        margin: 0 -20px 0 -20px;
+      }
+      .piano-section .piano-keys .white {
+        height: 180px;
+        width: 60px;
+      }
+    }
+
+    @media screen and (max-width: 615px) {
+      .piano-section .piano-keys .key:nth-child(13),
+      .piano-section .piano-keys .key:nth-child(14),
+      .piano-section .piano-keys .key:nth-child(15),
+      .piano-section .piano-keys .key:nth-child(16),
+      .piano-section .piano-keys .key :nth-child(17) {
+        display: none;
+      }
+      .piano-section .piano-keys .white {
+        width: 50px;
+      }
+    }
+
+    /* Styles for Hangman Game */
+    .hangman-section {
+      background: #5E63BA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100%;
+      padding: 0;
+      box-shadow: none;
+    }
+    .hangman-section .container {
+      display: flex;
+      width: 850px;
+      gap: 70px;
+      padding: 60px 40px;
+      background: #fff;
+      border-radius: 10px;
+      align-items: flex-end;
+      justify-content: space-between;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      max-width: 90%;
+    }
+    .hangman-section .hangman-box img {
+      user-select: none;
+      max-width: 270px;
+    }
+    .hangman-section .hangman-box h1 {
+      font-size: 1.45rem;
+      text-align: center;
+      margin-top: 20px;
+      text-transform: uppercase;
+      color: #333; /* Override global h1 color */
+    }
+    .hangman-section .game-box .word-display {
+      gap: 10px;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    .hangman-section .word-display .letter {
+      width: 28px;
+      font-size: 2rem;
+      text-align: center;
+font-weight: 600;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      border-bottom: 3px solid #000;
+    }
+    .hangman-section .word-display .letter.guessed {
+      margin: -40px 0 35px;
+      border-color: transparent;
+    }
+    .hangman-section .game-box h4 {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    .hangman-section .game-box h4 b {
+      font-weight: 600;
+    }
+    .hangman-section .game-box .guesses-text b {
+      color: #ff0000;
+    }
+    .hangman-section .custom-word-btn {
+        margin-top: 15px;
+        padding: 8px 16px;
+        background: #5E63BA;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .hangman-section .custom-word-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+    }
+    
+    .hangman-section .custom-word-modal.show {
+        opacity: 1;
+        pointer-events: all;
+    }
+    
+    .hangman-section .custom-word-modal .content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+    }
+    
+    .hangman-section .custom-word-input {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+    }
+
+    .hangman-section .game-box .keyboard {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      justify-content: center;
+    }
+    .hangman-section :where(.game-modal, .keyboard) button {
+      color: #fff;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 4px;
+      text-transform: uppercase;
+      background: #5E63BA;
+    }
+    .hangman-section .keyboard button {
+      padding: 7px;
+      width: calc(100% / 9 - 5px);
+    }
+    .hangman-section .keyboard button[disabled] {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    .hangman-section :where(.game-modal, .keyboard) button:hover {
+      background: #8286c9;
+    }
+    .hangman-section .game-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 0 10px;
+      transition: opacity 0.4s ease;
+    }
+    .hangman-section .game-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.4s 0.4s ease;
+    }
+    .hangman-section .game-modal .content {
+      padding: 30px;
+      max-width: 420px;
+      width: 100%;
+      border-radius: 10px;
+      background: #fff;
+      text-align: center;
+box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .hangman-section .game-modal img {
+      max-width: 130px;
+      margin-bottom: 20px;
+    }
+    .hangman-section .game-modal img[src="images/victory.gif"] {
+      margin-left: -10px;
+    }
+    .hangman-section .game-modal h4 {
+      font-size: 1.53rem;
+    }
+    .hangman-section .game-modal p {
+      font-size: 1.15rem;
+      margin: 15px 0 30px;
+      font-weight: 500;
+    }
+    .hangman-section .game-modal p b {
+      color: #5E63BA;
+      font-weight: 600;
+    }
+    .hangman-section .game-modal button {
+      padding: 12px 23px;
+    }
+
+    @media (max-width: 782px) {
+      .hangman-section .container {
+        flex-direction: column;
+        padding: 30px 15px;
+        align-items: center;
+      }
+      .hangman-section .hangman-box img {
+        max-width: 200px;
+      }
+      .hangman-section .hangman-box h1 {
+        display: none;
+      }
+      .hangman-section .game-box h4 {
+        font-size: 1rem;
+      }
+      .hangman-section .word-display .letter {
+        margin-bottom: 35px;
+        font-size: 1.7rem;
+      }
+      .hangman-section .word-display .letter.guessed {
+        margin: -35px 0 25px;
+      }
+      .hangman-section .game-modal img {
+        max-width: 120px;
+      }
+      .hangman-section .game-modal h4 {
+        font-size: 1.45rem;
+      }
+      .hangman-section .game-modal p {
+        font-size: 1.1rem;
+      }
+      .hangman-section .game-modal button {
+        padding: 10px 18px;
+      }
+    }
+
+    /* Styles for Image Editor */
+    .image-editor-section {
+      background: #E3F2FD;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100%;
+      padding: 0;
+      box-shadow: none;
+    }
+    .image-editor-section .container{
+      width: 850px;
+      padding: 30px 35px 35px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      max-width: 90%;
+    }
+    .image-editor-section .container.disable .editor-panel,
+    .image-editor-section .container.disable .controls .reset-filter,
+    .image-editor-section .container.disable .controls .save-img{
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .image-editor-section .container h2{
+      margin-top: -8px;
+      font-size: 22px;
+      font-weight: 500;
+      color: #333; /* Override global h2 color */
+    }
+    .image-editor-section .container .wrapper{
+      display: flex;
+      margin: 20px 0;
+      min-height: 335px;
+      flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    }
+    .image-editor-section .wrapper .editor-panel{
+      padding: 15px 20px;
+      width: 280px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .image-editor-section .editor-panel .title{
+      display: block;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    .image-editor-section .editor-panel .options, .image-editor-section .controls{
+      display: flex;
+      flex-wrap: wrap;
+justify-content: space-between;
+    }
+    .image-editor-section .editor-panel button{
+      outline: none;
+      height: 40px;
+      font-size: 14px;
+      color: #6C757D;
+      background: #fff;
+      border-radius: 3px;
+      margin-bottom: 8px;
+      border: 1px solid #aaa;
+    }
+    .image-editor-section .editor-panel .filter button{
+      width: calc(100% / 2 - 4px);
+    }
+    .image-editor-section .editor-panel button:hover{
+      background: #f5f5f5;
+    }
+    .image-editor-section .filter button.active{
+      color: #fff;
+      border-color: #5372F0;
+      background: #5372F0;
+    }
+    .image-editor-section .filter .slider{
+      margin-top: 12px;
+    }
+    .image-editor-section .filter .slider .filter-info{
+      display: flex;
+      color: #464646;
+      font-size: 14px;
+      justify-content: space-between;
+    }
+    .image-editor-section .filter .slider input{
+      width: 100%;
+      height: 5px;
+      accent-color: #5372F0;
+    }
+    .image-editor-section .editor-panel .rotate{
+      margin-top: 17px;
+    }
+    .image-editor-section .editor-panel .rotate button{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(100% / 4 - 3px);
+    }
+    .image-editor-section .rotate .options button:nth-child(3),
+    .image-editor-section .rotate .options button:nth-child(4){
+      font-size: 18px;
+    }
+    .image-editor-section .rotate .options button:active{
+      color: #fff;
+      background: #5372F0;
+      border-color: #5372F0;
+    }
+    .image-editor-section .wrapper .preview-img{
+      flex-grow: 1;
+      display: flex;
+      overflow: hidden;
+      margin-left: 20px;
+      border-radius: 5px;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-editor-section .preview-img img{
+      max-width: 490px;
+      max-height: 335px;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .image-editor-section .controls button{
+      padding: 11px 20px;
+      font-size: 14px;
+      border-radius: 3px;
+      outline: none;
+      color: #fff;
+      cursor: pointer;
+      background: none;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+    .image-editor-section .controls .reset-filter{
+      color: #6C757D;
+      border: 1px solid #6C757D;
+    }
+    .image-editor-section .controls .reset-filter:hover{
+      color: #fff;
+      background: #6C757D;
+    }
+    .image-editor-section .controls .choose-img{
+      background: #6C757D;
+      border: 1px solid #6C757D;
+    }
+    .image-editor-section .controls .save-img{
+      margin-left: 5px;
+      background: #5372F0;
+      border: 1px solid #5372F0;
+    }
+
+    @media screen and (max-width: 760px) {
+      .image-editor-section .container{
+        padding: 25px;
+      }
+      .image-editor-section .container .wrapper{
+        flex-wrap: wrap-reverse;
+      }
+      .image-editor-section .wrapper .editor-panel{
+        width: 100%;
+      }
+      .image-editor-section .wrapper .preview-img{
+width: 100%;
+        margin: 0 0 15px;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      .image-editor-section .controls button{
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .image-editor-section .controls .row{
+        width: 100%;
+      }
+      .image-editor-section .controls .row .save-img{
+        margin-left: 0px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Profile Web</h1>
+
+  <!-- PROFILE CARD -->
+  <section class="main">
+    <div class="profile-card">
+      <div class="image">
+        <img src="image.jpg" alt="Profile Picture" class="profile-pic" />
+      </div>
+      <div class="data">
+        <h2>ThienVi</h2>
+        <span>Developer</span>
+      </div>
+      <div class="row">
+        <div class="info">
+          <h3>View</h3>
+          <span>15B</span>
+        </div>
+        <div class="info">
+          <h3>Followers</h3>
+          <span>2B</span>
+        </div>
+        <div class="info">
+          <h3>Like</h3>
+          <span>5B</span>
+        </div>
+      </div>
+      <div class="buttons">
+        <a href="https://www.facebook.com/vi.le.468343?locale=vi_VN" class="btn">Facebook</a>
+        <a href="https://github.com/copilot/c/57615eef-8277-4d85-86d6-f685e4b7aaf0" class="btn">Github</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Playable Piano -->
+  <section class="piano-section">
+    <div class="wrapper">
+      <header>
+        <h2>Playable PIANO</h2>
+        <div class="column volume-slider">
+          <span>Volume</span><input type="range" min="0" max="1" value="0.5" step="any">
+        </div>
+        <div class="column keys-checkbox">
+          <span>Show Keys</span><input type="checkbox" checked>
+        </div>
+      </header>
+      <ul class="piano-keys">
+        <li class="key white" data-key="a"><span>a</span></li>
+        <li class="key black" data-key="w"><span>w</span></li>
+        <li class="key white" data-key="s"><span>s</span></li>
+        <li class="key black" data-key="e"><span>e</span></li>
+        <li class="key white" data-key="d"><span>d</span></li>
+        <li class="key white" data-key="f"><span>f</span></li>
+        <li class="key black" data-key="t"><span>t</span></li>
+        <li class="key white" data-key="g"><span>g</span></li>
+        <li class="key black" data-key="y"><span>y</span></li>
+        <li class="key white" data-key="h"><span>h</span></li>
+        <li class="key black" data-key="u"><span>u</span></li>
+        <li class="key white" data-key="j"><span>j</span></li>
+        <li class="key white" data-key="k"><span>k</span></li>
+        <li class="key black" data-key="o"><span>o</span></li>
+        <li class="key white" data-key="l"><span>l</span></li>
+        <li class="key black" data-key="p"><span>p</span></li>
+        <li class="key white" data-key=";"><span>;</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Hangman Game -->
+  <section class="hangman-section">
+    <div class="custom-word-modal">
+        <div class="content">
+<h3>Enter Custom Word</h3>
+            <input type="text" class="custom-word-input" placeholder="Your word">
+            <input type="text" class="custom-hint-input" placeholder="Hint (optional)">
+            <button class="use-custom-word">Use This Word</button>
+            <button class="cancel-custom-word">Cancel</button>
+        </div>
+    </div>
+    
+    <div class="game-modal">
+        <div class="content">
+            <img src="#" alt="gif">
+            <h4>Game Over!</h4>
+            <p>The correct word was: <b>rainbow</b></p>
+            <button class="play-again">Play Again</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="hangman-box">
+            <img src="images/hangman-0.svg" draggable="false" alt="hangman-img">
+            <h1>Hangman Game</h1>
+            <button class="custom-word-btn">Custom Word</button>
+        </div>
+        <div class="game-box">
+            <ul class="word-display"></ul>
+            <h4 class="hint-text">Hint: <b></b></h4>
+            <h4 class="guesses-text">Incorrect guesses: <b></b></h4>
+            <div class="keyboard"></div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Image Editor -->
+  <section class="image-editor-section">
+    <div class="container disable">
+        <h2>Easy Image Editor</h2>
+        <div class="wrapper">
+            <div class="editor-panel">
+                <div class="filter">
+                    <label class="title">Filters</label>
+                    <div class="options">
+                        <button id="brightness" class="active">Brightness</button>
+                        <button id="saturation">Saturation</button>
+                        <button id="inversion">Inversion</button>
+                        <button id="grayscale">Grayscale</button>
+                    </div>
+                    <div class="slider">
+                        <div class="filter-info">
+                            <p class="name">Brighteness</p>
+                            <p class="value">100%</p>
+                        </div>
+                        <input type="range" value="100" min="0" max="200">
+                    </div>
+                </div>
+                <div class="rotate">
+                    <label class="title">Rotate & Flip</label>
+                    <div class="options">
+                        <button id="left"><i class="fa-solid fa-rotate-left"></i></button>
+                        <button id="right"><i class="fa-solid fa-rotate-right"></i></button>
+                        <button id="horizontal"><i class='bx bx-reflect-vertical'></i></button>
+                        <button id="vertical"><i class='bx bx-reflect-horizontal' ></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-img">
+                <img src="image-placeholder.svg" alt="preview-img">
+            </div>
+        </div>
+        <div class="controls">
+            <button class="reset-filter">Reset Filters</button>
+<div class="row">
+                <input type="file" class="file-input" accept="image/*" hidden>
+                <button class="choose-img">Choose Image</button>
+                <button class="save-img">Save Image</button>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Combined JavaScript for all projects -->
+  <script>
+    // JavaScript for Playable Piano
+    const pianoKeys = document.querySelectorAll(".piano-section .piano-keys .key"),
+    volumeSlider = document.querySelector(".piano-section .volume-slider input"),
+    keysCheckbox = document.querySelector(".piano-section .keys-checkbox input");
+
+    let allKeys = [],
+    audio = new Audio(`tunes/a.wav`); // by default, audio src is "a" tune
+
+    const playTune = (key) => {
+        audio.src = `tunes/${key}.wav`; // passing audio src based on key pressed
+        audio.play(); // playing audio
+
+        const clickedKey = document.querySelector(`.piano-section [data-key="${key}"]`); // getting clicked key element
+        clickedKey.classList.add("active"); // adding active class to the clicked key element
+        setTimeout(() => { // removing active class after 150 ms from the clicked key element
+            clickedKey.classList.remove("active");
+        }, 150);
+    }
+
+    pianoKeys.forEach(key => {
+        allKeys.push(key.dataset.key); // adding data-key value to the allKeys array
+        // calling playTune function with passing data-key value as an argument
+        key.addEventListener("click", () => playTune(key.dataset.key));
+    });
+
+    const handleVolume = (e) => {
+        audio.volume = e.target.value; // passing the range slider value as an audio volume
+    }
+
+    const showHideKeys = () => {
+        // toggling hide class from each key on the checkbox click
+        pianoKeys.forEach(key => key.classList.toggle("hide"));
+    }
+
+    const pressedKey = (e) => {
+        // if the pressed key is in the allKeys array, only call the playTune function
+        if(allKeys.includes(e.key)) playTune(e.key);
+    }
+
+    if (keysCheckbox) keysCheckbox.addEventListener("click", showHideKeys);
+    if (volumeSlider) volumeSlider.addEventListener("input", handleVolume);
+    document.addEventListener("keydown", pressedKey);
+
+
+    // JavaScript for Hangman Game
+    const wordList = [
+        { word: "guitar", hint: "A musical instrument with strings." },
+        { word: "oxygen", hint: "A colorless, odorless gas essential for life." },
+        { word: "mountain", hint: "A large natural elevation of the Earth's surface." },
+        { word: "painting", hint: "An art form using colors on a surface to create images or expression." },
+        { word: "astronomy", hint: "The scientific study of celestial objects and phenomena." },
+        { word: "football", hint: "A popular sport played with a spherical ball." },
+        { word: "chocolate", hint: "A sweet treat made from cocoa beans." },
+        { word: "butterfly", hint: "An insect with colorful wings and a slender body." },
+{ word: "history", hint: "The study of past events and human civilization." },
+        { word: "pizza", hint: "A savory dish consisting of a round, flattened base with toppings." },
+        { word: "jazz", hint: "A genre of music characterized by improvisation and syncopation." },
+        { word: "camera", hint: "A device used to capture and record images or videos." },
+        { word: "diamond", hint: "A precious gemstone known for its brilliance and hardness." },
+        { word: "adventure", hint: "An exciting or daring experience." },
+        { word: "science", hint: "The systematic study of the structure and behavior of the physical and natural world." },
+        { word: "bicycle", hint: "A human-powered vehicle with two wheels." },
+        { word: "sunset", hint: "The daily disappearance of the sun below the horizon." },
+        { word: "coffee", hint: "A popular caffeinated beverage made from roasted coffee beans." },
+        { word: "dance", hint: "A rhythmic movement of the body often performed to music." },
+        { word: "galaxy", hint: "A vast system of stars, gas, and dust held together by gravity." },
+        { word: "orchestra", hint: "A large ensemble of musicians playing various instruments." },
+        { word: "volcano", hint: "A mountain or hill with a vent through which lava, rock fragments, hot vapor, and gas are ejected." },
+        { word: "novel", hint: "A long work of fiction, typically with a complex plot and characters." },
+        { word: "sculpture", hint: "A three-dimensional art form created by shaping or combining materials." },
+        { word: "symphony", hint: "A long musical composition for a full orchestra, typically in multiple movements." },
+        { word: "architecture", hint: "The art and science of designing and constructing buildings." },
+        { word: "ballet", hint: "A classical dance form characterized by precise and graceful movements." },
+        { word: "astronaut", hint: "A person trained to travel and work in space." },
+        { word: "waterfall", hint: "A cascade of water falling from a height." },
+        { word: "technology", hint: "The application of scientific knowledge for practical purposes." },
+        { word: "rainbow", hint: "A meteorological phenomenon that is caused by reflection, refraction, and dispersion of light." },
+        { word: "universe", hint: "All existing matter, space, and time as a whole." },
+        { word: "piano", hint: "A musical instrument played by pressing keys that cause hammers to strike strings." },
+        { word: "vacation", hint: "A period of time devoted to pleasure, rest, or relaxation." },
+        { word: "rainforest", hint: "A dense forest characterized by high rainfall and biodiversity." },
+        { word: "theater", hint: "A building or outdoor area in which plays, movies, or other performances are staged." },
+        { word: "telephone", hint: "A device used to transmit sound over long distances." },
+{ word: "language", hint: "A system of communication consisting of words, gestures, and syntax." },
+        { word: "desert", hint: "A barren or arid land with little or no precipitation." },
+        { word: "sunflower", hint: "A tall plant with a large yellow flower head." },
+        { word: "fantasy", hint: "A genre of imaginative fiction involving magic and supernatural elements." },
+        { word: "telescope", hint: "An optical instrument used to view distant objects in space." },
+        { word: "breeze", hint: "A gentle wind." },
+        { word: "oasis", hint: "A fertile spot in a desert where water is found." },
+        { word: "photography", hint: "The art, process, or practice of creating images by recording light or other electromagnetic radiation." },
+        { word: "safari", hint: "An expedition or journey, typically to observe wildlife in their natural habitat." },
+        { word: "planet", hint: "A celestial body that orbits a star and does not produce light of its own." },
+        { word: "river", hint: "A large natural stream of water flowing in a channel to the sea, a lake, or another such stream." },
+        { word: "tropical", hint: "Relating to or situated in the region between the Tropic of Cancer and the Tropic of Capricorn." },
+        { word: "mysterious", hint: "Difficult or impossible to understand, explain, or identify." },
+        { word: "enigma", hint: "Something that is mysterious, puzzling, or difficult to understand." },
+        { word: "paradox", hint: "A statement or situation that contradicts itself or defies intuition." },
+        { word: "puzzle", hint: "A game, toy, or problem designed to test ingenuity or knowledge." },
+        { word: "whisper", hint: "To speak very softly or quietly, often in a secretive manner." },
+        { word: "shadow", hint: "A dark area or shape produced by an object blocking the light." },
+        { word: "secret", hint: "Something kept hidden or unknown to others." },
+        { word: "curiosity", hint: "A strong desire to know or learn something." },
+        { word: "unpredictable", hint: "Not able to be foreseen or known beforehand; uncertain." },
+        { word: "obfuscate", hint: "To confuse or bewilder someone; to make something unclear or difficult to understand." },
+        { word: "unveil", hint: "To make known or reveal something previously secret or unknown." },
+        { word: "illusion", hint: "A false perception or belief; a deceptive appearance or impression." },
+        { word: "moonlight", hint: "The light from the moon." },
+        { word: "vibrant", hint: "Full of energy, brightness, and life." },
+        { word: "nostalgia", hint: "A sentimental longing or wistful affection for the past." },
+        { word: "brilliant", hint: "Exceptionally clever, talented, or impressive." },
+    ];
+
+    const hangmanWordDisplay = document.querySelector(".hangman-section .word-display");
+const hangmanGuessesText = document.querySelector(".hangman-section .guesses-text b");
+    const hangmanKeyboardDiv = document.querySelector(".hangman-section .keyboard");
+    const hangmanImage = document.querySelector(".hangman-section .hangman-box img");
+    const hangmanGameModal = document.querySelector(".hangman-section .game-modal");
+    const hangmanPlayAgainBtn = document.querySelector(".hangman-section .play-again");
+
+    let currentWord, correctLetters, wrongGuessCount;
+    let customWordMode = false;
+    
+    const customWordModal = document.querySelector(".hangman-section .custom-word-modal");
+    const customWordBtn = document.querySelector(".hangman-section .custom-word-btn");
+    const customWordInput = document.querySelector(".hangman-section .custom-word-input");
+    const customHintInput = document.querySelector(".hangman-section .custom-hint-input");
+    const useCustomBtn = document.querySelector(".hangman-section .use-custom-word");
+    const cancelCustomBtn = document.querySelector(".hangman-section .cancel-custom-word");
+    
+    customWordBtn.addEventListener("click", () => {
+        customWordModal.classList.add("show");
+    });
+    
+    useCustomBtn.addEventListener("click", () => {
+        const word = customWordInput.value.trim().toLowerCase();
+        if(word) {
+            currentWord = word;
+            const hint = customHintInput.value.trim() || "No hint provided";
+            document.querySelector(".hangman-section .hint-text b").innerText = hint;
+            customWordMode = true;
+            customWordInput.value = "";
+            customHintInput.value = "";
+            customWordModal.classList.remove("show");
+            resetGame();
+        }
+    });
+    
+    cancelCustomBtn.addEventListener("click", () => {
+        customWordModal.classList.remove("show");
+    });
+    const maxGuesses = 6;
+
+    const resetGame = () => {
+        correctLetters = [];
+        wrongGuessCount = 0;
+        hangmanImage.src = "images/hangman-0.svg";
+        hangmanGuessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
+        hangmanWordDisplay.innerHTML = currentWord.split("").map(() => `<li class="letter"></li>`).join("");
+        hangmanKeyboardDiv.querySelectorAll("button").forEach(btn => btn.disabled = false);
+        hangmanGameModal.classList.remove("show");
+    }
+
+    const getRandomWord = () => {
+        if(customWordMode) {
+            customWordMode = false;
+        } else {
+            const { word, hint } = wordList[Math.floor(Math.random() * wordList.length)];
+            currentWord = word;
+            document.querySelector(".hangman-section .hint-text b").innerText = hint;
+        }
+        resetGame();
+    }
+
+    const gameOver = (isVictory) => {
+        const modalText = isVictory ? `You found the word:` : 'The correct word was:';
+        hangmanGameModal.querySelector("img").src = `images/${isVictory ? 'victory' : 'lost'}.gif`;
+hangmanGameModal.querySelector("h4").innerText = isVictory ? 'Congrats!' : 'Game Over!';
+        hangmanGameModal.querySelector("p").innerHTML = `${modalText} <b>${currentWord}</b>`;
+        hangmanGameModal.classList.add("show");
+    }
+
+    const initGame = (button, clickedLetter) => {
+        if(currentWord.includes(clickedLetter)) {
+            [...currentWord].forEach((letter, index) => {
+                if(letter === clickedLetter) {
+                    correctLetters.push(letter);
+                    hangmanWordDisplay.querySelectorAll("li")[index].innerText = letter;
+                    hangmanWordDisplay.querySelectorAll("li")[index].classList.add("guessed");
+                }
+            });
+        } else {
+            wrongGuessCount++;
+            hangmanImage.src = `images/hangman-${wrongGuessCount}.svg`;
+        }
+        button.disabled = true;
+        hangmanGuessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
+
+        if(wrongGuessCount === maxGuesses) return gameOver(false);
+        if(correctLetters.length === currentWord.length) return gameOver(true);
+    }
+
+    for (let i = 97; i <= 122; i++) {
+        const button = document.createElement("button");
+        button.innerText = String.fromCharCode(i);
+        hangmanKeyboardDiv.appendChild(button);
+        button.addEventListener("click", (e) => initGame(e.target, String.fromCharCode(i)));
+    }
+
+    getRandomWord();
+    if (hangmanPlayAgainBtn) hangmanPlayAgainBtn.addEventListener("click", getRandomWord);
+
+
+    // JavaScript for Image Editor
+    const fileInput = document.querySelector(".image-editor-section .file-input"),
+    filterOptions = document.querySelectorAll(".image-editor-section .filter button"),
+    filterName = document.querySelector(".image-editor-section .filter-info .name"),
+    filterValue = document.querySelector(".image-editor-section .filter-info .value"),
+    filterSlider = document.querySelector(".image-editor-section .slider input"),
+    rotateOptions = document.querySelectorAll(".image-editor-section .rotate button"),
+    previewImg = document.querySelector(".image-editor-section .preview-img img"),
+    resetFilterBtn = document.querySelector(".image-editor-section .reset-filter"),
+    chooseImgBtn = document.querySelector(".image-editor-section .choose-img"),
+    saveImgBtn = document.querySelector(".image-editor-section .save-img");
+
+    let brightness = "100", saturation = "100", inversion = "0", grayscale = "0";
+    let rotate = 0, flipHorizontal = 1, flipVertical = 1;
+
+    const loadImage = () => {
+        let file = fileInput.files[0];
+        if(!file) return;
+        previewImg.src = URL.createObjectURL(file);
+        previewImg.addEventListener("load", () => {
+            resetFilterBtn.click();
+            document.querySelector(".image-editor-section .container").classList.remove("disable");
+        });
+    }
+
+    const applyFilter = () => {
+previewImg.style.transform = `rotate(${rotate}deg) scale(${flipHorizontal}, ${flipVertical})`;
+        previewImg.style.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
+    }
+
+    filterOptions.forEach(option => {
+        option.addEventListener("click", () => {
+            document.querySelector(".image-editor-section .filter button.active").classList.remove("active");
+            option.classList.add("active");
+            filterName.innerText = option.innerText;
+
+            if(option.id === "brightness") {
+                filterSlider.max = "200";
+                filterSlider.value = brightness;
+                filterValue.innerText = `${brightness}%`;
+            } else if(option.id === "saturation") {
+                filterSlider.max = "200";
+                filterSlider.value = saturation;
+                filterValue.innerText = `${saturation}%`
+            } else if(option.id === "inversion") {
+                filterSlider.max = "100";
+                filterSlider.value = inversion;
+                filterValue.innerText = `${inversion}%`;
+            } else {
+                filterSlider.max = "100";
+                filterSlider.value = grayscale;
+                filterValue.innerText = `${grayscale}%`;
+            }
+        });
+    });
+
+    const updateFilter = () => {
+        filterValue.innerText = `${filterSlider.value}%`;
+        const selectedFilter = document.querySelector(".image-editor-section .filter .active");
+
+        if(selectedFilter.id === "brightness") {
+            brightness = filterSlider.value;
+        } else if(selectedFilter.id === "saturation") {
+            saturation = filterSlider.value;
+        } else if(selectedFilter.id === "inversion") {
+            inversion = filterSlider.value;
+        } else {
+            grayscale = filterSlider.value;
+        }
+        applyFilter();
+    }
+
+    rotateOptions.forEach(option => {
+        option.addEventListener("click", () => {
+            if(option.id === "left") {
+                rotate -= 90;
+            } else if(option.id === "right") {
+                rotate += 90;
+            } else if(option.id === "horizontal") {
+                flipHorizontal = flipHorizontal === 1 ? -1 : 1;
+            } else {
+                flipVertical = flipVertical === 1 ? -1 : 1;
+            }
+            applyFilter();
+        });
+    });
+
+    const resetImageEditorFilter = () => {
+        brightness = "100"; saturation = "100"; inversion = "0"; grayscale = "0";
+        rotate = 0; flipHorizontal = 1; flipVertical = 1;
+        filterOptions[0].click();
+        applyFilter();
+    }
+
+    const saveImage = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = previewImg.naturalWidth;
+        canvas.height = previewImg.naturalHeight;
+ctx.filter = `brightness(${brightness}%) saturate(${saturation}%) invert(${inversion}%) grayscale(${grayscale}%)`;
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        if(rotate !== 0) {
+            ctx.rotate(rotate * Math.PI / 180);
+        }
+        ctx.scale(flipHorizontal, flipVertical);
+        ctx.drawImage(previewImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+
+        const link = document.createElement("a");
+        link.download = "image.jpg";
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
+    if (filterSlider) filterSlider.addEventListener("input", updateFilter);
+    if (resetFilterBtn) resetFilterBtn.addEventListener("click", resetImageEditorFilter);
+    if (saveImgBtn) saveImgBtn.addEventListener("click", saveImage);
+    if (fileInput) fileInput.addEventListener("change", loadImage);
+    if (chooseImgBtn) chooseImgBtn.addEventListener("click", () => fileInput.click());
+  </script>
+
+</body>
+</html>
